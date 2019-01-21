@@ -1,0 +1,47 @@
+apply plugin: "org.jetbrains.kotlin.multiplatform"
+
+kotlin {
+    targets {
+        fromPreset(presets.jvm, 'jvm')
+        fromPreset(presets.js, 'js')
+        fromPreset(presets.iosX64, 'ios')
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation KotlinCommonLib.stdLib
+            }
+        }
+        commonTest {
+            dependencies {
+                implementation KotlinTestLib.common
+                implementation KotlinTestLib.annotations
+            }
+        }
+        jvmMain {
+            dependencies {
+                implementation KotlinJvmLib.stdLib
+            }
+        }
+        jvmTest {
+            dependencies {
+                implementation KotlinJvmLib.testKotlin
+                implementation KotlinJvmLib.testKotlinJUnit
+            }
+        }
+        jsMain {
+            dependencies {
+                implementation KotlinJs.stdLib
+            }
+        }
+        jsTest {
+            dependencies {
+                implementation KotlinJs.testKotlin
+            }
+        }
+        iosMain {
+        }
+        iosTest {
+        }
+    }
+}
